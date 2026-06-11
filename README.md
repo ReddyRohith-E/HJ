@@ -1,35 +1,10 @@
 # Harsha Jewellers — Static Landing Page
 
-A fast, mobile-first static website for Harsha Jewellers. It showcases the brand hero, collections, and a contact form for inquiries.
+A fast, mobile-first static landing page built with Vite + React. It presents the brand hero, collections, and a contact form for inquiries. The project is intended for static hosting (Netlify, GitHub Pages, etc.).
 
-## Overview
+## Quick Start
 
-- Single-page static site (no login/cart or backend)
-- Optimized for desktop, iPhone 13/14, and Android Compact
-- Clean, elegant UI with Royal Gold and Deep Maroon branding
-
-### Core sections
-
-- Hero with tagline: “Your satisfaction is our priority.”
-- About brand
-- Collections grid (Rings, Necklaces, Bangles, Earrings)
-- Contact form (client-side validation; Formspree-ready)
-
-### Non-functional goals
-
-- Load fast (< 1.5s target on broadband)
-- HTTPS-ready for static hosting (Netlify, GitHub Pages)
-- SEO-friendly metadata and accessible structure (WCAG 2.1)
-
-## Tech stack
-
-- Vite + React 19 (SWC)
-- No router at runtime; single page layout
-- Minimal dependencies to keep bundle small
-
-## Getting started
-
-Requirements: Node 18+
+Requirements: Node 18 or newer
 
 Development:
 
@@ -38,57 +13,44 @@ npm install
 npm run dev
 ```
 
-Production build:
+Build for production:
 
 ```powershell
 npm run build
 npm run preview
 ```
 
-## Contact form setup
+## Project Structure (key files)
 
-By default, the contact form is visible but won’t submit anywhere until you set an endpoint.
+- [src/App.jsx](src/App.jsx) — App shell: `Navbar` → `Home` sections → `Footer`
+- [src/pages/Home.jsx](src/pages/Home.jsx) — Hero, About, Collections, Contact
+- [src/components/ContactForm.jsx](src/components/ContactForm.jsx) — Accessible contact form
+- [src/components/DeviceProvider.jsx](src/components/DeviceProvider.jsx) — Device/layout helpers
+- [src/index.css](src/index.css) and [src/App.css](src/App.css) — Global and layout styles
+- [public/prices.json](public/prices.json) — Example data used in the site
 
-1. Create a Formspree form and copy the endpoint URL (e.g., `https://formspree.io/f/xxxxxx`).
-2. Create a `.env` file in the project root:
+## Contact form
+
+The contact form is client-side and requires an endpoint to submit. To connect Formspree (example):
+
+1. Create a Formspree form and copy the endpoint (e.g. `https://formspree.io/f/xxxxxx`).
+2. Add a `.env` file at the project root with:
 
 ```env
 VITE_FORMSPREE_ENDPOINT=https://formspree.io/f/xxxxxx
 ```
 
-Restart the dev server for changes to take effect. The form performs basic validation and shows status messages inline.
-
-## Accessibility & SEO
-
-- Headings use serif; body uses sans-serif for legibility
-- Color contrast meets guidelines; buttons are touch-friendly
-- Landmarks, labels, and `aria-live` status in contact form
-- `<meta>` description, theme color, fonts preconnect are included in `index.html`
+Restart the dev server after adding environment variables.
 
 ## Deployment
 
-### Netlify
+- Netlify: Connect the repo, build command `npm run build`, publish directory `dist`.
+- GitHub Pages: Build locally and publish the `dist` folder to a `gh-pages` branch or use a GH Action.
 
-1. Push this repo to GitHub.
-2. In Netlify, create a new site from Git and select this repo.
-3. Build command: `npm run build` — Publish directory: `dist`.
+## Notes & Next Steps
 
-### GitHub Pages
+- Replace placeholder images with final brand assets (logo, product shots).
+- Add a CI workflow for automatic deploys and a sitemap/robots.txt for SEO.
+- Run Lighthouse audits and tune performance/accessibility as needed.
 
-1. Build locally: `npm run build`.
-2. Publish the `dist` folder to the `gh-pages` branch (or use an action like `peaceiris/actions-gh-pages`).
-
-## Project structure
-
-- `src/App.jsx` — Single-page shell (Navbar → Home sections → Footer)
-- `src/pages/Home.jsx` — Hero, About, Collections, Contact sections
-- `src/components/ContactForm.jsx` — Accessible form with validation
-- `src/components/DeviceProvider.jsx` — Adds `layout-...` class for iOS/Android tweaks
-- `src/index.css` — Global theme and utilities
-- `src/App.css` — Section and layout styling
-
-## Notes & next steps
-
-- Replace Unsplash images with final brand assets (SVG logo, product shots)
-- Add a deploy workflow (Netlify or GitHub Pages) and sitemap/robots.txt
-- Continue auditing with Lighthouse for performance and accessibility
+If you want, I can add a `netlify.toml` or a GitHub Actions workflow next.
